@@ -26,6 +26,12 @@ export default class DeckBoard extends Component {
     })
   }
 
+  handleCreateClick = (e) => {
+    e.preventDefault();
+    console.log('create deck was clicked')
+    // this.createDeck();
+  }
+
   drawCards = (myCards) => {
     fetch(`http://localhost:3000/decks/${this.state.deckId}/draw`, {
       method: 'POST',
@@ -48,7 +54,7 @@ export default class DeckBoard extends Component {
   render() {
     return (
       <div>
-      <button type="button" class="btn btn-info">Create Deck</button>
+      <button type="button" class="btn btn-info" onClick={this.handleCreateClick}>Create Deck</button>
         <button type="button" class="btn btn-warning" onClick={this.handleDrawClick}>Draw</button>
         <div class="flex-container">
           <div class="flex-box"> 1 </div>
