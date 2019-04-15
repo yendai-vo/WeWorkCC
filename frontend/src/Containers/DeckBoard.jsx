@@ -5,7 +5,9 @@ import '../board.css';
 export default class DeckBoard extends Component {
   state = {
     deckId: '',
-    cards: []
+    cards: [],
+    startedDrawingCards: false,
+    newDeck: false,
   }
 
   componentDidMount() {
@@ -19,17 +21,22 @@ export default class DeckBoard extends Component {
     })
     .then(res => res.json())
     .then(deck => {
-      console.log(deck)
+      //console.log(deck)
       this.setState({
-        deckId: deck.id
+        deckId: deck.id,
+        newDeck: true
       })
     })
   }
 
   handleCreateClick = (e) => {
     e.preventDefault();
-    console.log('create deck was clicked')
-    // this.createDeck();
+    this.createDeck();
+    this.openModal();
+  }
+
+  openModal = () => {
+
   }
 
   drawCards = (myCards) => {
@@ -49,21 +56,44 @@ export default class DeckBoard extends Component {
   handleDrawClick = (e) => {
     e.preventDefault();
     this.drawCards();
+    this.setState ({
+      startedDrawingCards: true
+    })
+  }
+
+  cardMap = () => {
+    if (this.state.cards && this.state.cards.length) {
+      return this.state.cards.map(item => (
+        <DeckCard 
+          suit={item.suit}
+          cardType={item.card_type} 
+          id={item.id}
+        />
+      ))
+    } else if (this.state.startedDrawingCards === true) {
+      return "Deck is Empty";
+    } else {
+      return null;
+    }
   }
 
   render() {
     return (
-      <div>
-      <button type="button" class="btn btn-info" onClick={this.handleCreateClick}>Create Deck</button>
-        <button type="button" class="btn btn-warning" onClick={this.handleDrawClick}>Draw</button>
-        <div class="flex-container">
-          <div class="flex-box"> 1 </div>
-          <div class="flex-box"> 2 </div>
-          <div class="flex-box"> 3 </div>
-          <div class="flex-box"> 4 </div>
-          <div class="flex-box"> 5 </div>
+      <div className="container">
+        <div className="theButtons">
+          <button type="button" className="btn-lg btn btn-info" data-toggle="modal" onClick={this.handleCreateClick}>Create Deck</button>
+
+          <button type="button" className="btn-lg btn btn-warning" onClick={this.handleDrawClick}>Draw</button>
         </div>
-        <DeckCard />
+
+        <div className="flex-container">
+          {this.cardMap()}
+        </div>
+        <div>
+          <div className="modal">
+            <div className="modal-body">Deck Created</div>
+          </div>
+        </div>
       </div>
     )
   }

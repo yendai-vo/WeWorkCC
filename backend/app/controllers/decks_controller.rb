@@ -55,7 +55,7 @@ class DecksController < ApplicationController
             cards.each { |card|  Card.find(card.id).destroy }
             render json: cards
         else 
-            render json: { status: 200, msg: 'Deck is Empty' }
+            render json: []
         end
     end
 

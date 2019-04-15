@@ -1,12 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import '../card.css';
 
 export default class DeckCard extends Component {
-  
+
   render() {
     return (
       <div>
-        <h1>hello</h1>
-        <h2>{this.props.cards}</h2>
+        <div className="card">
+          <div className={this.props.suit}>
+              {this.props.cardType} 
+              <p>{this.props.suit}</p>
+          </div>
+       
+          
+          <div className={this.props.suit}>
+            <div className="bottomright">
+              {this.props.cardType} 
+              <p>{this.props.suit}</p>
+            </div>
+          </div>
+        
+          
+        </div>
       </div>
     )
   }
