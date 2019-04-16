@@ -7,7 +7,6 @@ export default class DeckBoard extends Component {
     deckId: '',
     cards: [],
     startedDrawingCards: false,
-    newDeck: false,
   }
 
   componentDidMount() {
@@ -31,13 +30,14 @@ export default class DeckBoard extends Component {
     })
   }
 
+  displayCreateMessage = () => {
+    alert("New Deck Created!")
+  }
+
   handleCreateClick = (e) => {
     e.preventDefault();
     this.createDeck();
-  }
-
-  openModal = () => {
-
+    this.displayCreateMessage();
   }
 
   drawCards = (myCards) => {
