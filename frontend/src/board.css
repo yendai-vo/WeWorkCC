@@ -25,3 +25,8 @@
 button {
     margin: 10px;
 }
+
+.theButtons {
+    display: flex;
+    justify-content: center;
+}

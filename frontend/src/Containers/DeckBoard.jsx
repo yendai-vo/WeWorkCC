@@ -24,6 +24,8 @@ export default class DeckBoard extends Component {
       //console.log(deck)
       this.setState({
         deckId: deck.id,
+        cards: [],
+        startedDrawingCards: false,
         newDeck: true
       })
     })
@@ -32,7 +34,6 @@ export default class DeckBoard extends Component {
   handleCreateClick = (e) => {
     e.preventDefault();
     this.createDeck();
-    this.openModal();
   }
 
   openModal = () => {
@@ -81,7 +82,7 @@ export default class DeckBoard extends Component {
     return (
       <div className="container">
         <div className="theButtons">
-          <button type="button" className="btn-lg btn btn-info" data-toggle="modal" onClick={this.handleCreateClick}>Create Deck</button>
+          <button type="button" className="btn-lg btn btn-info" onClick={this.handleCreateClick}>Create Deck</button>
 
           <button type="button" className="btn-lg btn btn-warning" onClick={this.handleDrawClick}>Draw</button>
         </div>
@@ -89,11 +90,13 @@ export default class DeckBoard extends Component {
         <div className="flex-container">
           {this.cardMap()}
         </div>
+
         <div>
           <div className="modal">
             <div className="modal-body">Deck Created</div>
           </div>
         </div>
+        
       </div>
     )
   }
